@@ -1,0 +1,509 @@
+     ┌────────────────────────────────────────────────────────────────────┐
+     │                        • MobaXterm 20.5 •                          │
+     │            (SSH client, X-server and networking tools)             │
+     │                                                                    │
+     │ → Telnet session to 10.14.0.224                                    │
+     │ → Your DISPLAY is set to 192.168.3.107:0.0                         │
+     │ → For more info, ctrl+click on help or visit our website           │
+     └────────────────────────────────────────────────────────────────────┘
+
+Connected to Dynamips VM "R5" (ID 1, type c3600) - Console port
+Press ENTER to get the prompt.
+ROMMON emulation microcode.
+
+                           Launching IOS image at 0x80008000...
+
+                                                               Smart Init is disabled. IOMEM set to: 5
+
+                                                                                                        Using iomem percentage: 5
+
+              Restricted Rights Legend
+
+Use, duplication, or disclosure by the Government is
+subject to restrictions as set forth in subparagraph
+(c) of the Commercial Computer Software - Restricted
+Rights clause at FAR sec. 52.227-19 and subparagraph
+(c) (1) (ii) of the Rights in Technical Data and Computer
+Software clause at DFARS sec. 252.227-7013.
+
+           cisco Systems, Inc.
+           170 West Tasman Drive
+           San Jose, California 95134-1706
+
+
+
+Cisco IOS Software, 3600 Software (C3640-A3JS-M), Version 12.4(25d), RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Wed 18-Aug-10 06:58 by prod_rel_team
+
+Cisco 3640 (R4700) processor (revision 0xFF) with 124928K/6144K bytes of memory.
+Processor board ID FF1045C5
+R4700 CPU at 100MHz, Implementation 33, Rev 1.2
+4 Ethernet interfaces
+DRAM configuration is 64 bits wide with parity enabled.
+125K bytes of NVRAM.
+8192K bytes of processor board System flash (Read/Write)
+
+SETUP: new interface Ethernet0/0 placed in "shutdown" state
+SETUP: new interface Ethernet0/1 placed in "shutdown" state
+SETUP: new interface Ethernet0/2 placed in "shutdown" state
+SETUP: new interface Ethernet0/3 placed in "shutdown" state
+
+
+Press RETURN to get started!
+
+
+*Mar  1 00:00:10.731: %LINEPROTO-5-UPDOWN: Line protocol on Interface VoIP-Null0, changed state to up
+*Mar  1 00:00:10.735: %LINK-3-UPDOWN: Interface Ethernet0/0, changed state to up
+*Mar  1 00:00:10.743: %LINK-3-UPDOWN: Interface Ethernet0/1, changed state to up
+*Mar  1 00:00:10.747: %LINK-3-UPDOWN: Interface Ethernet0/2, changed state to up
+*Mar  1 00:00:10.755: %LINK-3-UPDOWN: Interface Ethernet0/3, changed state to up
+*Mar  1 00:00:10.759: %LINEPROTO-5-UPDOWN: Line protocol on Interface IPv6-mpls, changed state to up
+*Mar  1 00:00:11.643: %SYS-5-CONFIG_I: Configured from memory by console
+*Mar  1 00:00:11.783: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/0, changed state to down
+*Mar  1 00:00:11.783: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/1, changed state to down
+*Mar  1 00:00:11.783: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/2, changed state to down
+*Mar  1 00:00:11.783: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/3, changed state to down
+*Mar  1 00:00:12.303: %SYS-5-RESTART: System restarted --
+Cisco IOS Software, 3600 Software (C3640-A3JS-M), Version 12.4(25d), RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2010 by Cisco Systems, Inc.
+Compiled Wed 18-Aug-10 06:58 by prod_rel_team
+*Mar  1 00:00:12.343: %SNMP-5-COLDSTART: SNMP agent on host R5 is undergoing a cold start
+*Mar  1 00:00:13.647: %LINK-5-CHANGED: Interface Ethernet0/0, changed state to administratively down
+*Mar  1 00:00:13.655: %LINK-5-CHANGED: Interface Ethernet0/1, changed state to administratively down
+*Mar  1 00:00:13.663: %LINK-5-CHANGED: Interface Ethernet0/2, changed state to administratively down
+*Mar  1 00:00:13.671: %LINK-5-CHANGED: Interface Ethernet0/3, changed state to administratively down 2021-01-15 16:00:39 fx8x0kllwBwrZbXY
+R5#enable
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#interface e0/0
+R5(config-if)#ip address 10.0.35.2 255.255.255.252
+R5(config-if)#no shutdown
+R5(config-if)#
+*Mar  1 00:09:18.295: %LINK-3-UPDOWN: Interface Ethernet0/0, changed state to up
+*Mar  1 00:09:19.295: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/0, changed state to up
+R5(config-if)#exit
+R5(config)#interface e0/2
+R5(config-if)#ip address 10.0.45.2 255.255.255.252
+R5(config-if)#no shutdown
+R5(config-if)#exit
+*Mar  1 00:09:56.259: %LINK-3-UPDOWN: Interface Ethernet0/2, changed state to up
+*Mar  1 00:09:57.259: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/2, changed state to up
+R5(config-if)#exit
+R5(config)#interface loopback 0
+R5(config-if)#ip ad
+*Mar  1 00:10:08.015: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up
+R5(config-if)#ip address 5.5.5.5 255.255.255.255
+R5(config-if)#exit
+R5(config)#interface loopback 1
+R5(config-if)#ip add
+*Mar  1 00:10:36.603: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback1, changed state to up
+R5(config-if)#ip address 192.168.51.1 255.255.255.0
+R5(config-if)#exit
+R5(config)#^Z
+R5#
+*Mar  1 00:11:01.539: %SYS-5-CONFIG_I: Configured from console by console
+R5#ping 10.0.35.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.0.35.1, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 20/29/40 ms
+R5#ping 10.0.35.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.0.35.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 12/28/40 ms
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.35.1 remote-as 230
+R5(config-router)#neighbor 10.0.45.1 remote-as 400
+R5(config-router)#
+*Mar  1 00:43:50.871: %BGP-5-ADJCHANGE: neighbor 10.0.35.1 Up
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+*Mar  1 00:44:05.211: %SYS-5-CONFIG_I: Configured from console by console
+R5#
+*Mar  1 00:44:20.231: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Up
+R5#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     5.0.0.0/32 is subnetted, 1 subnets
+C       5.5.5.5 is directly connected, Loopback0
+B    192.168.11.0/24 [20/0] via 10.0.35.1, 00:04:06
+     10.0.0.0/30 is subnetted, 3 subnets
+B       10.0.23.0 [20/0] via 10.0.35.1, 00:04:07
+C       10.0.45.0 is directly connected, Ethernet0/2
+C       10.0.35.0 is directly connected, Ethernet0/0
+C    192.168.51.0/24 is directly connected, Loopback1
+R5#show ip bgp
+BGP table version is 3, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*  10.0.23.0/30     10.0.45.1                              0 400 230 i
+*>                  10.0.35.1                0             0 230 i
+*  192.168.11.0     10.0.45.1                              0 400 230 100 i
+*>                  10.0.35.1                              0 230 100 i
+R5# conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router bgp 500
+R5(config-router)#network 192.168.51.0 mask 255.255.255.0
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+*Mar  1 00:50:57.323: %SYS-5-CONFIG_I: Configured from console by console
+R5#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+B    192.168.31.0/24 [20/0] via 10.0.35.1, 00:02:43
+B    192.168.42.0/24 [20/0] via 10.0.45.1, 00:01:42
+B    192.168.43.0/24 [20/0] via 10.0.45.1, 00:01:42
+     5.0.0.0/32 is subnetted, 1 subnets
+C       5.5.5.5 is directly connected, Loopback0
+B    192.168.11.0/24 [20/0] via 10.0.35.1, 00:08:28
+B    192.168.41.0/24 [20/0] via 10.0.45.1, 00:02:13
+B    192.168.21.0/24 [20/0] via 10.0.35.1, 00:01:42
+     10.0.0.0/30 is subnetted, 3 subnets
+B       10.0.23.0 [20/0] via 10.0.35.1, 00:08:28
+C       10.0.45.0 is directly connected, Ethernet0/2
+C       10.0.35.0 is directly connected, Ethernet0/0
+C    192.168.51.0/24 is directly connected, Loopback1
+R5#show ip bgp
+BGP table version is 9, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*  10.0.23.0/30     10.0.45.1                              0 400 230 i
+*>                  10.0.35.1                0             0 230 i
+*  192.168.11.0     10.0.45.1                              0 400 230 100 i
+*>                  10.0.35.1                              0 230 100 i
+*  192.168.21.0     10.0.45.1                              0 400 230 i
+*>                  10.0.35.1                              0 230 i
+*  192.168.31.0     10.0.45.1                              0 400 230 i
+*>                  10.0.35.1                0             0 230 i
+*  192.168.41.0     10.0.35.1                              0 230 400 i
+*>                  10.0.45.1                0             0 400 i
+*  192.168.42.0     10.0.35.1                              0 230 400 i
+*>                  10.0.45.1                0             0 400 i
+*  192.168.43.0     10.0.35.1                              0 230 400 i
+*>                  10.0.45.1                0             0 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#route-map map1 permit 10
+R5(config-route-map)#set as-path prepend 400
+R5(config-route-map)#exit
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.45.1 route-map map1 out
+R5(config-router)#neighbor 10.0.35.1 route-map map1 out
+R5(config-router)#exit
+R5(config)#conf t
+                ^
+% Invalid input detected at '^' marker.
+
+R5(config)#route-map map1 permit 10
+R5(config-route-map)#set as-path prepend 1 1 1 1
+R5(config-route-map)#exit
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.45.1 route-map map1 out
+R5(config-router)#neighbor 10.0.35.1 route-map map1 out
+R5(config-router)#exit
+R5(config)#no route-map map1
+R5(config)#interface e0/2
+R5(config-if)#shutdown
+R5(config-if)#exi
+*Mar  1 01:44:07.543: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Down Interface flap
+R5(config-if)#exit
+R5(config)#
+*Mar  1 01:44:09.511: %LINK-5-CHANGED: Interface Ethernet0/2, changed state to administratively down
+*Mar  1 01:44:10.511: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/2, changed state to down
+R5(config)#^Z
+R5#clea
+*Mar  1 01:48:47.939: %SYS-5-CONFIG_I: Configured from console by console
+R5#clear ip bgp 10.0.45.1 soft
+R5#clear ip bgp 10.0.35.1 soft
+R5#conft
+Translating "conft"
+
+Translating "conft"
+% Unknown command or computer name, or unable to find computer address
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#interface e0/2
+R5(config-if)#no shutdown
+R5(config-if)#exit
+R5(config)#^Z
+R5#
+*Mar  1 01:49:40.175: %LINK-3-UPDOWN: Interface Ethernet0/2, changed state to up
+*Mar  1 01:49:41.175: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/2, changed state to up
+R5#
+*Mar  1 01:49:41.483: %SYS-5-CONFIG_I: Configured from console by console
+R5#
+*Mar  1 01:49:46.087: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Up
+R5#clear ip bgp *
+R5#
+*Mar  1 01:55:31.103: %BGP-5-ADJCHANGE: neighbor 10.0.35.1 Down User reset
+*Mar  1 01:55:31.103: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Down User reset
+*Mar  1 01:55:31.959: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Up
+R5#
+*Mar  1 01:55:32.219: %BGP-5-ADJCHANGE: neighbor 10.0.35.1 Up
+R5#show ip bgp
+BGP table version is 11, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+*                   10.0.45.1                              0 400 400 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+r                   10.0.45.1                0             0 400 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*                   10.0.45.1                              0 400 400 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*                   10.0.45.1                              0 400 400 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*                   10.0.45.1                              0 400 400 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*                   10.0.45.1                0             0 400 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*                   10.0.45.1                0             0 400 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*                   10.0.45.1                0             0 400 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.45.1 remote-as 400
+R5(config-router)#neighbor 10.0.35.1 remote-as 230
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+*Mar  1 01:59:07.027: %SYS-5-CONFIG_I: Configured from console by console
+R5#show ip interface loopback 1
+Loopback1 is up, line protocol is up
+  Internet address is 192.168.51.1/24
+  Broadcast address is 255.255.255.255
+  Address determined by setup command
+  MTU is 1514 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Outgoing access list is not set
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP fast switching on the same interface is disabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF Fast switching turbo vector
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  WCCP Redirect outbound is disabled
+  WCCP Redirect inbound is disabled
+  WCCP Redirect exclude is disabled
+R5#show ip bgp route
+% Incomplete command.
+
+R5#show ip bgp
+BGP table version is 11, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+*                   10.0.45.1                              0 400 400 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+r                   10.0.45.1                0             0 400 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*                   10.0.45.1                              0 400 400 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*                   10.0.45.1                              0 400 400 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*                   10.0.45.1                              0 400 400 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*                   10.0.45.1                0             0 400 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*                   10.0.45.1                0             0 400 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*                   10.0.45.1                0             0 400 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+B    192.168.31.0/24 [20/0] via 10.0.35.1, 00:06:18
+B    192.168.42.0/24 [20/0] via 10.0.35.1, 00:06:18
+B    192.168.43.0/24 [20/0] via 10.0.35.1, 00:06:18
+     5.0.0.0/32 is subnetted, 1 subnets
+C       5.5.5.5 is directly connected, Loopback0
+B    192.168.11.0/24 [20/0] via 10.0.35.1, 00:06:18
+B    192.168.41.0/24 [20/0] via 10.0.35.1, 00:06:18
+B    192.168.21.0/24 [20/0] via 10.0.35.1, 00:06:18
+     10.0.0.0/30 is subnetted, 3 subnets
+B       10.0.23.0 [20/0] via 10.0.35.1, 00:06:18
+C       10.0.45.0 is directly connected, Ethernet0/2
+C       10.0.35.0 is directly connected, Ethernet0/0
+C    192.168.51.0/24 is directly connected, Loopback1
+R5#show ip bgp
+BGP table version is 11, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show ip bgp
+BGP table version is 11, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show ip bgp rib-failure
+Network            Next Hop                      RIB-failure   RIB-NH Matches
+10.0.45.0/30       10.0.35.1           Higher admin distance              n/a
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#
+R5(config)#router bgp 500
+R5(config-router)# neighbor 10.0.45.1 weight 2000
+R5(config-router)# neighbor 10.0.35.1 weight 2000
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+*Mar  1 02:06:56.959: %SYS-5-CONFIG_I: Configured from console by console
+R5#show ip bgp
+BGP table version is 11, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show ip bgp rib-failure
+Network            Next Hop                      RIB-failure   RIB-NH Matches
+10.0.45.0/30       10.0.35.1           Higher admin distance              n/a
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router bgp 500
+R5(config-router)#no neighbor 10.0.35.1 weight 2000
+R5(config-router)#no neighbor 10.0.45.1 weight 2000
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+*Mar  1 02:07:43.259: %SYS-5-CONFIG_I: Configured from console by console
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#no interface loopback 1
+R5(config)#inte
+*Mar  1 02:11:05.767: %LINK-5-CHANGED: Interface Loopback1, changed state to administratively down
+*Mar  1 02:11:06.767: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback1, changed state to down
+R5(config)#interface loopback 1
+R5(config-if)#ip addr
+*Mar  1 02:11:24.475: %LINK-3-UPDOWN: Interface Loopback1, changed state to up
+*Mar  1 02:11:25.475: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback1, changed state to up
+R5(config-if)#ip address 192.168.51.1 255.255.255.0
+R5(config-if)#exit
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.35.1 remote-as 230
+R5(config-router)#neighbor 10.0.45.1 remote-as 400
+R5(config-router)#exit
+R5(config)#router bgp 500
+R5(config-router)#network 192.168.51.0 mask 255.255.255.0
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+R5#
+*Mar  1 02:14:40.159: %SYS-5-CONFIG_I: Configured from console by console
+R5#show ip bgp
+BGP table version is 13, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#
+

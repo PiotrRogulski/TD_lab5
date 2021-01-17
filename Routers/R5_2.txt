@@ -1,0 +1,732 @@
+     ┌────────────────────────────────────────────────────────────────────┐
+     │                        • MobaXterm 20.5 •                          │
+     │            (SSH client, X-server and networking tools)             │
+     │                                                                    │
+     │ ➤ Telnet session to 10.14.0.224                                    │
+     │ ➤ Your DISPLAY is set to 192.168.1.107:0.0                         │
+     │ ➤ For more info, ctrl+click on help or visit our website           │
+     └────────────────────────────────────────────────────────────────────┘
+
+Connected to Dynamips VM "R5" (ID 1, type c3600) - Console port
+Press ENTER to get the prompt.
+5.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show ip bgp rib-failure
+Network            Next Hop                      RIB-failure   RIB-NH Matches
+10.0.45.0/30       10.0.35.1           Higher admin distance              n/a
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router bgp 500
+R5(config-router)#no neighbor 10.0.35.1 weight 2000
+R5(config-router)#no neighbor 10.0.45.1 weight 2000
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+*Mar  1 02:07:43.259: %SYS-5-CONFIG_I: Configured from console by console
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#no interface loopback 1
+R5(config)#inte
+*Mar  1 02:11:05.767: %LINK-5-CHANGED: Interface Loopback1, changed state to administratively down
+*Mar  1 02:11:06.767: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback1, changed state to down
+R5(config)#interface loopback 1
+R5(config-if)#ip addr
+*Mar  1 02:11:24.475: %LINK-3-UPDOWN: Interface Loopback1, changed state to up
+*Mar  1 02:11:25.475: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback1, changed state to up
+R5(config-if)#ip address 192.168.51.1 255.255.255.0
+R5(config-if)#exit
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.35.1 remote-as 230
+R5(config-router)#neighbor 10.0.45.1 remote-as 400
+R5(config-router)#exit
+R5(config)#router bgp 500
+R5(config-router)#network 192.168.51.0 mask 255.255.255.0
+R5(config-router)#exit
+R5(config)#^Z
+R5#
+R5#
+*Mar  1 02:14:40.159: %SYS-5-CONFIG_I: Configured from console by console
+R5#show ip bgp
+BGP table version is 13, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#quit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+R5 con0 is now available
+
+
+
+
+
+Press RETURN to get started.
+
+
+
+
+
+
+
+
+ 2021-01-15 16:00:39 fx8x0kllwBwrZbXY
+R5#
+R5#show ip bgp
+BGP table version is 13, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+r> 10.0.45.0/30     10.0.35.1                              0 230 400 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*> 192.168.41.0     10.0.35.1                              0 230 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show int brief
+             ^
+% Invalid input detected at '^' marker.
+
+R5#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                10.0.35.2       YES manual up                    up
+Ethernet0/1                unassigned      YES unset  administratively down down
+Ethernet0/2                10.0.45.2       YES manual up                    up
+Ethernet0/3                unassigned      YES unset  administratively down down
+Loopback0                  5.5.5.5         YES manual up                    up
+Loopback1                  192.168.51.1    YES manual up                    up
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#route-
+R5(config)#route-map map
+R5(config)#route-map map1
+R5(config-route-map)#?
+Route Map configuration commands:
+  continue     Continue on a different entry within the route-map
+  default      Set a command to its defaults
+  description  Route-map comment
+  exit         Exit from route-map configuration mode
+  help         Description of the interactive help system
+  match        Match values from routing table
+  no           Negate a command or set its defaults
+  set          Set values in destination routing protocol
+
+R5(config-route-map)#
+R5(config-route-map)#exi
+R5(config)#?
+Configure commands:
+  aaa                         Authentication, Authorization and Accounting.
+  aal2-profile                Configure AAL2 profile
+  access-list                 Add an access list entry
+  alarm-interface             Configure a specific Alarm Interface Card
+  alias                       Create command alias
+  alps                        Configure Airline Protocol Support
+  appletalk                   Appletalk global configuration commands
+  application                 Define application
+  arap                        Appletalk Remote Access Protocol
+  archive                     Archive the configuration
+  arp                         Set a static ARP entry
+  async-bootp                 Modify system bootp parameters
+  backhaul-session-manager    Configure Backhaul Session Manager
+  banner                      Define a login banner
+  bba-group                   Configure BBA Group
+  boot                        Modify system boot parameters
+  bridge                      Bridge Group.
+  bstun                       BSTUN global configuration commands
+  buffers                     Adjust system buffer pool parameters
+  busy-message                Display message when connection to host fails
+  call                        Configure Call parameters
+  call-history-mib            Define call history mib parameters
+  call-manager-fallback       SRST for Cisco Call Manager fallback. For Call
+                              Manager Express configuration use the
+                              'telephony-service' command
+  carrier-id                  Name of the carrier associated with this trunk
+                              group
+  ccm-manager                 Call Manager
+  cdp                         Global CDP configuration subcommands
+  chat-script                 Define a modem chat script
+  class-map                   Configure QoS Class Map
+  clns                        Global CLNS configuration subcommands
+  clock                       Configure time-of-day clock
+  cns                         CNS agents
+  config-register             Define the configuration register
+  configuration               Configuration access
+  connect                     cross-connect two interfaces
+  control-plane               Configure control plane services
+  decnet                      Global DECnet configuration subcommands
+  default                     Set a command to its defaults
+  default-value               Default character-bits values
+  define                      interface range macro definition
+  dial-control-mib            Define Dial Control Mib parameters
+  dial-peer                   Dial Map (Peer) configuration commands
+  dialer                      Dialer commands
+  dialer-list                 Create a dialer list entry
+  diffserv                    Differentiated Services (COPS)
+  dlsw                        Data Link Switching global configuration commands
+  dnsix-dmdp                  Provide DMDP service for DNSIX
+  dnsix-nat                   Provide DNSIX service for audit trails
+  do                          To run exec commands in config mode
+  dot1x                       Dot1x Global Configuration Commands
+  downward-compatible-config  Generate a configuration compatible with older
+                              software
+  dspfarm                     Enable the dspfarm service
+  dspu                        DownStream Physical Unit Command
+  dss                         Configure dss parameters
+  enable                      Modify enable password parameters
+  end                         Exit from configure mode
+  errdisable                  Error disable
+  event                       Event related configuration commands
+  exception                   Exception handling
+  exit                        Exit from configure mode
+  fax                         Configure fax parameters
+  file                        Adjust file system parameters
+  flow-sampler-map            Flow sampler configuration
+  frame-relay                 global frame relay configuration commands
+  gateway                     Gateway
+  gw-accounting               Enable voip gateway accounting.
+  help                        Description of the interactive help system
+  hostname                    Set system's network name
+  http                        HTTP Config
+  identity                    Identity Configuration Commands
+  interface                   Select an interface to configure
+  ip                          Global IP configuration subcommands
+  ipv6                        Global IPv6 configuration commands
+  ipx                         Novell/IPX global configuration commands
+  isis                        Global ISIS configuration subcommands
+  iua                         Configure ISDN user Adaptation Layer
+  ivr                         ivr utility command
+  ixi                         IXI Config command
+  kerberos                    Configure Kerberos
+  key                         Key management
+  keymap                      Define a new keymap
+  kron                        Kron interval Facility
+  l2tp-class                  l2tp-class configuration
+  lane                        Configure LAN Emulation
+  lat                         DEC Local Area Transport (LAT) transmission
+                              protocol
+  li-view                     LI View
+  line                        Configure a terminal line
+  locaddr-priority-list       Establish queueing priorities based on LU address
+  logging                     Modify message logging facilities
+  login                       Enable secure login checking
+  login-string                Define a host-specific login string
+  mac-address-table           Configure the MAC address table
+  map-class                   Configure static map class
+  map-list                    Configure static map list
+  memory                      Configure memory management
+  memory-size                 Adjust memory size by percentage
+  menu                        Define a user-interface menu
+  mgcp                        Enable Media Gateway Control Protocol
+  microcode                   configure microcode
+  mls                         mls global commands
+  mmoip                       Multi Media Over IP
+  modemcap                    Modem Capabilities database
+  monitor                     Monitoring different system events
+  mop                         Configure the DEC MOP Server
+  mpls                        Configure MPLS parameters
+  mpoa                        MPOA global configuration commands
+  mrcp                        MRCP(Real Time Streaming Protocol) configuration
+  mta                         Configure the Mail Transfer Agent
+  multilink                   PPP multilink global configuration
+  ncia                        Native Client Interface Architecture
+  netbios                     NETBIOS access control filtering
+  no                          Negate a command or set its defaults
+  ntp                         Configure NTP
+  num-exp                     Dial Map Number Expansion configuration commands
+  oer                         Optimized Exit Routing configuration submodes
+  oer-map                     Create oer-map and enter oer-map command mode
+  parser                      Configure parser
+  partition                   Partition device
+  password                    Configure encryption password (key)
+  policy-manager              Policy Manager configuration commands
+  policy-map                  Configure QoS Policy Map
+  port-channel                EtherChannel configuration
+  ppp                         PPP global configuration
+  printer                     Define an LPD printer
+  priority-list               Build a priority list
+  privilege                   Command privilege parameters
+  process                     Configure process
+  process-max-time            Maximum time for process to run before
+                              voluntarily relinquishing processor
+  prompt                      Set system's prompt
+  pseudowire-class            Pseudowire-class configuration
+  queue-list                  Build a custom queue list
+  random-detect-group         Configure random-detect class
+  rbe                         Commands for Routing RFC 1483 Ethernet
+                              encapsulated packets
+  regexp                      regexp commands
+  resource                    Configure Embedded Resource Manager (ERM)
+  resume-string               Define a host-specific resume string
+  rif                         Source-route RIF cache
+  rlogin                      Rlogin configuration commands
+  rmon                        Remote Monitoring
+  route-map                   Create route-map or enter route-map command mode
+  router                      Enable a routing process
+  rsrb                        RSRB LSAP/DSAP filtering
+  rtsp                        RTSP(Real Time Streaming Protocol) configuration
+  sap-priority-list           Establish queueing priorities based on SAP and/or
+                              MAC address(es)
+  sccp                        Enable Skinny Client Control Protocol
+  scheduler                   Scheduler parameters
+  scripting                   Configure options for scripting languages
+  security                    Infra Security CLIs
+  service                     Modify use of network based services
+  sgbp                        SGBP Stack Group Bidding Protocol configuration
+  shutdown                    Shutdown system elements
+  sip-ua                      SIP User Agent (UA)
+  sna                         Network Management Physical Unit Command
+  snasw                       SNA Switching Services Command
+  snmp                        Modify non engine SNMP parameters
+  snmp-server                 Modify SNMP engine parameters
+  source-bridge               Source-route bridging ring groups
+  spanning-tree               Spanning Tree Subsystem
+  srcp                        Enable Simple Resource Coordination Protocol
+  stackmaker                  Specify stack name and add its member
+  standby                     Global HSRP configuration commands
+  state-machine               Define a TCP dispatch state machine
+  stun                        STUN global configuration commands
+  subscriber                  Subscriber configuration
+  subscriber-policy           Subscriber policy
+  subscription                ASNL based Subscriptions configuration
+  table-map                   Configure Table Map
+  tacacs-server               Modify TACACS query parameters
+  tag-switching               Dynamic Tag Switching commands
+  tarp                        Global TARP configuration subcommands
+  tbct                        configure TBCT related parameters
+  telephony-service           Configure Cisco Call Manager Express
+  template                    Select a template to configure
+  terminal-queue              Terminal queue commands
+  tftp-server                 Provide TFTP service for netload requests
+
+R5(config)#no rou
+R5(config)#no route-
+R5(config)#no route-map map1
+R5(config)#router bgp 500
+R5(config-router)#no neighbor 10.0.35.1 rou
+R5(config-router)#no neighbor 10.0.35.1 route-m
+R5(config-router)#no neighbor 10.0.35.1 route-map map1 out
+R5(config-router)#no neighbor 10.0.45.1 route-map map1 out
+R5(config-router)#neighbor 10.0.45.1 remote-as 400
+R5(config-router)#neighbor 10.0.35.1 remote-as 230
+R5(config-router)#end
+R5#
+*Mar  1 02:20:45.487: %SYS-5-CONFIG_I: Configured from console by console
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#route-ma
+R5(config)#route-map map prepend permit 10
+                          ^
+% Invalid input detected at '^' marker.
+
+R5(config)#route-map prepend permit 10
+R5(config-route-map)#set as-path pre
+R5(config-route-map)#set as-path prepend 500 500 500 500 500
+R5(config-route-map)#exi
+R5(config)#router bgp 500
+R5(config-router)#neighbor 10.0.35.1 route-m
+R5(config-router)#neighbor 10.0.35.1 route-map prepend out
+R5(config-router)#^Z
+R5#
+*Mar  1 02:24:00.459: %SYS-5-CONFIG_I: Configured from console by console
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#in e0/2
+R5(config-if)#shutdown
+R5(config-if)#
+*Mar  1 02:29:21.575: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Down Interface flap
+R5(config-if)#^Z
+R5#
+*Mar  1 02:29:23.559: %LINK-5-CHANGED: Interface Ethernet0/2, changed state to administratively down
+*Mar  1 02:29:24.283: %SYS-5-CONFIG_I: Configured from console by console
+*Mar  1 02:29:24.559: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/2, changed state to down
+R5#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                10.0.35.2       YES manual up                    up
+Ethernet0/1                unassigned      YES unset  administratively down down
+Ethernet0/2                10.0.45.2       YES manual administratively down down
+Ethernet0/3                unassigned      YES unset  administratively down down
+Loopback0                  5.5.5.5         YES manual up                    up
+Loopback1                  192.168.51.1    YES manual up                    up
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#in e0/2
+R5(config-if)#no shutdown
+R5(config-if)#
+*Mar  1 02:30:40.183: %LINK-3-UPDOWN: Interface Ethernet0/2, changed state to up
+*Mar  1 02:30:41.183: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/2, changed state to up
+R5(config-if)#^Z
+R5#
+*Mar  1 02:30:48.815: %SYS-5-CONFIG_I: Configured from console by console
+R5#con
+*Mar  1 02:30:53.135: %BGP-5-ADJCHANGE: neighbor 10.0.45.1 Up
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#no route-map prepend
+R5(config)#router bgp
+% Incomplete command.
+
+R5(config)#router bgp 500
+R5(config-router)#no neighbor 10.0.35.1 route-m
+R5(config-router)#no neighbor 10.0.35.1 route-map prepend out
+R5(config-router)#neighbor 10.0.35.1 remote-
+R5(config-router)#neighbor 10.0.35.1 remote-as 230
+R5(config-router)#^Z
+R5#
+*Mar  1 02:31:36.951: %SYS-5-CONFIG_I: Configured from console by console
+R5#ping 192.168.31.1 source looopback1
+                               ^
+% Invalid input detected at '^' marker.
+
+R5#ping 192.168.31.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.31.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 12/25/40 ms
+R5#ping 192.168.41.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.41.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+.....
+Success rate is 0 percent (0/5)
+R5#ping 192.168.43.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.43.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+.....
+Success rate is 0 percent (0/5)
+R5#ping 192.168.41.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.41.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+.
+Success rate is 0 percent (0/1)
+R5#ping 192.168.42.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.42.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 36/41/44 ms
+R5#ping 192.168.43.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.43.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+.
+Success rate is 0 percent (0/1)
+R5#ping 192.168.43.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.43.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 40/41/44 ms
+R5#ping 192.168.41.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.41.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 16/19/20 ms
+R5#ping 192.168.42.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.42.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 40/40/44 ms
+R5#ping 192.168.42.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.42.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+.....
+Success rate is 0 percent (0/5)
+R5#ping 192.168.41.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.41.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 20/22/32 ms
+R5#ping 192.168.41.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.41.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 12/20/28 ms
+R5#ping 192.168.42.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.42.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+....
+Success rate is 0 percent (0/4)
+R5#ping 192.168.43.1 source loopback1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.43.1, timeout is 2 seconds:
+Packet sent with a source address of 192.168.51.1
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 36/40/44 ms
+R5#traceroute 192.168.41.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.41.1
+
+  1 10.0.45.1 24 msec 16 msec 20 msec
+R5#traceroute 192.168.43.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.43.1
+
+  1 10.0.35.1 32 msec 12 msec 24 msec
+  2  *  *  *
+  3  *  *  *
+  4  *
+R5#traceroute 192.168.41.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.41.1
+
+  1 10.0.45.1 24 msec 16 msec 20 msec
+R5#traceroute 192.168.42.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.42.1
+
+  1  *
+R5#traceroute 192.168.42.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.42.1
+
+  1
+R5#traceroute 192.168.42.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.42.1
+
+  1 10.0.35.1 20 msec 16 msec 20 msec
+  2  *  *  *
+  3  *
+R5#traceroute 192.168.41.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.41.1
+
+  1 10.0.45.1 20 msec 20 msec 20 msec
+R5#traceroute 192.168.43.1
+
+Type escape sequence to abort.
+Tracing the route to 192.168.43.1
+
+  1 10.0.35.1 24 msec 20 msec 20 msec
+  2  *
+R5#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+B    192.168.31.0/24 [20/0] via 10.0.35.1, 01:50:40
+B    192.168.42.0/24 [20/0] via 10.0.35.1, 00:02:55
+B    192.168.43.0/24 [20/0] via 10.0.35.1, 00:02:55
+     5.0.0.0/32 is subnetted, 1 subnets
+C       5.5.5.5 is directly connected, Loopback0
+B    192.168.11.0/24 [20/0] via 10.0.35.1, 01:50:40
+B    192.168.41.0/24 [20/20] via 10.0.45.1, 00:35:05
+B    192.168.21.0/24 [20/0] via 10.0.35.1, 01:50:40
+     10.0.0.0/30 is subnetted, 3 subnets
+B       10.0.23.0 [20/0] via 10.0.35.1, 01:50:40
+C       10.0.45.0 is directly connected, Ethernet0/2
+C       10.0.35.0 is directly connected, Ethernet0/0
+C    192.168.51.0/24 is directly connected, Loopback1
+R5#show ip bgp
+BGP table version is 35, local router ID is 192.168.51.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.0.23.0/30     10.0.35.1                0             0 230 i
+*> 192.168.11.0     10.0.35.1                              0 230 100 i
+*> 192.168.21.0     10.0.35.1                              0 230 i
+*> 192.168.31.0     10.0.35.1                0             0 230 i
+*  192.168.41.0     10.0.35.1                              0 230 400 i
+*>                  10.0.45.1               20             0 400 i
+*> 192.168.42.0     10.0.35.1                              0 230 400 i
+*> 192.168.43.0     10.0.35.1                              0 230 400 i
+*> 192.168.51.0     0.0.0.0                  0         32768 i
+R5#show running-config
+Building configuration...
+
+Current configuration : 1210 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+memory-size iomem 5
+no ip icmp rate-limit unreachable
+!
+!
+ip cef
+no ip domain lookup
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+interface Loopback0
+ ip address 5.5.5.5 255.255.255.255
+!
+interface Loopback1
+ ip address 192.168.51.1 255.255.255.0
+!
+interface Ethernet0/0
+ ip address 10.0.35.2 255.255.255.252
+ half-duplex
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+ half-duplex
+!
+interface Ethernet0/2
+ ip address 10.0.45.2 255.255.255.252
+ half-duplex
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ half-duplex
+!
+!
+router bgp 500
+ no synchronization
+ bgp log-neighbor-changes
+ network 192.168.51.0
+ neighbor 10.0.35.1 remote-as 230
+ neighbor 10.0.45.1 remote-as 400
+ no auto-summary
+!
+no ip http server
+ip forward-protocol nd
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+banner motd ^C 2021-01-15 16:00:39 fx8x0kllwBwrZbXY ^C
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+end
+
+R5#
