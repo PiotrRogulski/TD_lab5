@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt,notitlepage]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage[math]{fontspec}
+\usepackage[nosingleletter, lastparline]{impnattypo}
+\usepackage[polish]{babel}
+\usepackage{bookmark}
+\usepackage[margin=1in]{geometry}
+\usepackage[babel=true, tracking=true]{microtype}
+\usepackage{minted}
+\usepackage{parskip}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{hhline}
+\usepackage{subfig}
+\usepackage{hhline}
+
+\linespread{1.3}
+
+\renewcommand*{\thesection}{\Alph{section}}
+\setlength{\tabcolsep}{1.5mm}
+
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\setminted{frame=single, bgcolor=bg, breaklines=true, autogobble}
+
+\IfFontExistsTF{JetBrainsMono-Regular}{
+    \setmonofont{JetBrainsMono}[
+        UprightFont = *-Light,
+        BoldFont = *-Regular,
+        ItalicFont = *-Light-Italic,
+        Scale = MatchLowercase
+    ]
+}{}
+
+\title{\textbf{TD -- laboratorium 5}}
+\author{Piotr Rogulski 305867 \\ Szymon Sieradzki 305881}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Przydzielanie adresów IP}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Adresacja interfejsów}
+    \subfloat[Ethernet]{\begin{tabular}{|*4c|}
+        \hhline{|====|}
+            \textbf{Router} & \textbf{Interfejs} & \textbf{Adres IP} & \textbf{Podsieć} \\
+        \hline
+            R1 & e0/0 & 10.0.12.1 & 10.0.12.0/30 \\
+        \hline
+            R2 & e0/0 & 10.0.12.2 & 10.0.12.0/30 \\
+               & e0/1 & 10.0.24.1 & 10.0.24.0/30 \\
+               & e0/2 & 10.0.23.1 & 10.0.23.0/30 \\
+        \hline
+            R3 & e0/0 & 10.0.35.1 & 10.0.35.0/30 \\
+               & e0/2 & 10.0.23.2 & 10.0.23.0/30 \\
+               & e0/3 & 10.0.34.1 & 10.0.34.0/30 \\
+        \hline
+            R4 & e0/1 & 10.0.24.2 & 10.0.24.0/30 \\
+               & e0/2 & 10.0.45.1 & 10.0.45.0/30 \\
+               & e0/3 & 10.0.34.2 & 10.0.34.0/30 \\
+        \hline
+            R5 & e0/0 & 10.0.35.2 & 10.0.35.0/30 \\
+               & e0/2 & 10.0.45.2 & 10.0.45.0/30 \\
+        \hhline{|====|}
+    \end{tabular}}%
+    \quad%
+    \subfloat[Loopback]{\begin{tabular}{|*3c|}
+        \hhline{|===|}
+            \textbf{Router} & \textbf{Interfejs} & \textbf{Loopback IP} \\
+        \hline
+            R1 & L0 & 1.1.1.1/32      \\
+               & L1 & 192.168.11.1/24 \\
+        \hline
+            R2 & L0 & 2.2.2.2/32      \\
+               & L1 & 192.168.21.1/24 \\
+        \hline
+            R3 & L0 & 3.3.3.3/32      \\
+               & L1 & 192.168.31.1/24 \\
+        \hline
+            R4 & L0 & 4.4.4.4/32      \\
+               & L1 & 192.168.41.1/24 \\
+               & L2 & 192.168.42.1/24 \\
+               & L3 & 192.168.43.1/24 \\
+        \hline
+            R5 & L0 & 5.5.5.5/32      \\
+               & L1 & 192.168.51.1/24 \\
+        \hhline{|===|}
+    \end{tabular}}
+\end{table}
+
+\section{Konfiguracja OSPF w AS 230}
+
+\section{Podstawowa konfiguracja BGP}
+
+\section{Zaawansowana konfiguracja BGP}
+
+\end{document}
