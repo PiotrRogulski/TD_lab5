@@ -94,9 +94,18 @@
 \end{table}
 
 \section{Konfiguracja OSPF w AS 230}
-
+System autonomiczny AS 230 zawiera 2 routery R2 i R3, by ich wzajemna komunikacja była możliwa konieczne jest skonfigurowanie protokołu OSPF dla tych routerów. W konfiguracji protokołu zostaje dodana podsieć R2-R3 tj. podsieć o adresie 10.0.23.0/30. Prawidłową konfigurację OSPF potwierdzają wpisy w tablicach routingu i rezultat polecenia  \mintinline{text}{ping <adres IP>} wykonanego z R2 na interfejs loopback R3 i odwrotnie.
+\inputminted[label=Pingowanie interfejsu loopback R3 z R2, firstline=178, lastline=183]{text}{Routers/R2.txt}
+\inputminted[label=Pingowanie interfejsu loopback R2 z R3, firstline=306, lastline=311]{text}{Routers/R3.txt}
 \section{Podstawowa konfiguracja BGP}
-
+\subsection{Sesja iBGP R2-R3}
+Zainicjalizowanie sesji iBGP między routerami R2 i R3 następuje przez użycie poleceń  \mintinline{text}{router bgp 230} i  \mintinline{text}{neighbor <adres_sąsiada> remote-as 230}. Routery do połączenia wymagają ustawienia ich adresów jako adresów źródłowych przy pomocy  \mintinline{text}{neighbor <adres_sąsiada> update-source loopback 0}. Po konfiguracji sesja zostaje ustanowiona, co potwierdzają rezultaty polecenia  \mintinline{text}{show ip bgp neighbors} wywołanego na R2 i R3.
+\inputminted[label=Stan sesji BGP po ustawieniu adresów źródłowychna R2, firstline=242, lastline=244]{text}{Routers/R2.txt}
+\inputminted[label=Stan sesji BGP po ustawieniu adresów źródłowychna R3, firstline=439, lastline=441]{text}{Routers/R3.txt}
+\subsection{Sesja eBGP R1-R2}
+Między routerami R1 i R2 zainicjalizowana zostaje sesja eBGP przy pomocy poleceń użytych w poprzedniej sekcji z różnicą w podawanym numerze AS i bez ustawiania adresów źródłowych. Pomyślne ustanowienie eBGP potwierdzają rezultaty wywołania \mintinline{text}{show ip bgp summary} i \mintinline{text}{show ip bgp neighbors}.
+\inputminted[label=Rezultat polecenia show ip bgp summary na R1, firstline=123, lastline=128]{text}{Routers/R1.txt}
+\inputminted[label=Rezultat polecenia show ip bgp summary na R2, firstline=321, lastline=327]{text}{Routers/R2.txt}
 \section{Zaawansowana konfiguracja BGP}
 
 \end{document}
