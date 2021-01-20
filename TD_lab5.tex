@@ -94,33 +94,66 @@
 \end{table}
 
 \section{Konfiguracja OSPF w AS 230}
-System autonomiczny AS 230 zawiera 2 routery R2 i R3, by ich wzajemna komunikacja była możliwa konieczne jest skonfigurowanie protokołu OSPF dla tych routerów. W konfiguracji protokołu zostaje dodana podsieć R2-R3 tj. podsieć o adresie 10.0.23.0/30. Prawidłową konfigurację OSPF potwierdzają wpisy w tablicach routingu i rezultat polecenia  \mintinline{text}{ping <adres IP>} wykonanego z R2 na interfejs loopback R3 i odwrotnie.
-\inputminted[label=Pingowanie interfejsu loopback R3 z R2, firstline=178, lastline=183]{text}{Routers/R2.txt}
-\inputminted[label=Pingowanie interfejsu loopback R2 z R3, firstline=306, lastline=311]{text}{Routers/R3.txt}
+
+System autonomiczny AS 230 zawiera 2 routery R2 i R3, zatem by ich wzajemna komunikacja była możliwa konieczne jest skonfigurowanie protokołu OSPF dla tych routerów. W konfiguracji protokołu zostaje dodana podsieć R2-R3, tj. podsieć o adresie 10.0.23.0/30. Prawidłową konfigurację OSPF potwierdzają wpisy w tablicach routingu i rezultat polecenia \mintinline{text}{ping <adres IP>} wykonanego z R2 na interfejs loopback R3 i odwrotnie.
+\inputminted[label=Pingowanie interfejsu loopback R3 z R2, firstline=178, lastline=183]{text}{Routers/R2.txt}%
+\inputminted[label=Pingowanie interfejsu loopback R2 z R3, firstline=306, lastline=311]{text}{Routers/R3.txt}%
+
 \section{Podstawowa konfiguracja BGP}
+
 \subsection{Sesja iBGP R2-R3}
-Zainicjalizowanie sesji iBGP między routerami R2 i R3 następuje przez użycie poleceń  \mintinline{text}{router bgp 230} i  \mintinline{text}{neighbor <adres_sąsiada> remote-as 230}. Routery do połączenia wymagają ustawienia ich adresów jako adresów źródłowych przy pomocy  \mintinline{text}{neighbor <adres_sąsiada> update-source loopback 0}. Po konfiguracji sesja zostaje ustanowiona, co potwierdzają rezultaty polecenia  \mintinline{text}{show ip bgp neighbors} wywołanego na R2 i R3.
-\inputminted[label=Stan sesji BGP po ustawieniu adresów źródłowych na R2, firstline=242, lastline=244]{text}{Routers/R2.txt}
-\inputminted[label=Stan sesji BGP po ustawieniu adresów źródłowych na R3, firstline=439, lastline=441]{text}{Routers/R3.txt}
+
+Zainicjalizowanie sesji iBGP między routerami R2 i R3 następuje przez użycie poleceń \mintinline{text}{router bgp 230} i \mintinline{text}{neighbor <adres_sąsiada> remote-as 230}. Routery do połączenia wymagają ustawienia ich adresów jako adresów źródłowych przy pomocy komendy \mintinline{text}{neighbor <adres_sąsiada> update-source loopback 0}. Po konfiguracji sesja zostaje ustanowiona, co potwierdzają rezultaty polecenia \mintinline{text}{show ip bgp neighbors} wywołanego na R2 i R3.
+\inputminted[label=Stan sesji BGP po ustawieniu adresów źródłowych na R2, firstline=242, lastline=244]{text}{Routers/R2.txt}%
+\inputminted[label=Stan sesji BGP po ustawieniu adresów źródłowych na R3, firstline=439, lastline=441]{text}{Routers/R3.txt}%
+
 \subsection{Sesja eBGP R1-R2}
+
 Między routerami R1 i R2 zainicjalizowana zostaje sesja eBGP przy pomocy poleceń użytych w poprzedniej sekcji z różnicą w podawanym numerze AS i bez ustawiania adresów źródłowych. Pomyślne ustanowienie eBGP potwierdzają rezultaty wywołania \mintinline{text}{show ip bgp summary} i \mintinline{text}{show ip bgp neighbors}.
-\inputminted[label=Rezultat polecenia show ip bgp summary na R1, firstline=123, lastline=128]{text}{Routers/R1.txt}
-\inputminted[label=Rezultat polecenia show ip bgp summary na R2, firstline=321, lastline=327]{text}{Routers/R2.txt}
+\inputminted[label=Rezultat polecenia show ip bgp summary na R1, firstline=123, lastline=128]{text}{Routers/R1.txt}%
+\inputminted[label=Rezultat polecenia show ip bgp summary na R2, firstline=321, lastline=327]{text}{Routers/R2.txt}%
+
 \subsection{Rozgłaszanie podsieci w BGP}
-Rozgłaszanie podsieci w BGP odbywa się za pomocą polecenia  \mintinline{text}{network <adres> mask <maska>}. Rozgłoszona zostaje podsieć reprezentowana przez interfejs loopback 1 routera R1 tj. podsieć o adresie 192.168.11.1/24. Analiza wpisów w tablicach routingu na routerach R2 i R3 pokazuje, że podsieć R1 jest widoczna w routerze R2 i nie jest widoczna w R3. Wynika to z faktu, że podsieć jest rozgłaszana tylko w eBGP ustanowionym między R1 i R2.
-\inputminted[label= Tablica routingu na R2, firstline=468, lastline=496]{text}{Routers/R2.txt}
-\inputminted[label= Tablica routingu na R3, firstline=528, lastline=547]{text}{Routers/R3.txt}
-By w tablicy routingu R3 widoczna była podsieć R1 należy ustawić atrybut next-hop rozgłaszany z R2 do R3 był ustawiony na router R2, odbywa się to przy pomocy polecenia \mintinline{text}{neighbor <adres> next-hop-self}. Adres podsieci jest teraz obecny w tablicy routingu R2. W dalszym ciągu jednak polecenie  \mintinline{text}{ping} z R3 na adres R1 kończy się niepowodzeniem. Wynika to z jednostronnej komunikacji między routerami, podczas gdy do pomyślnego zakończenia polecenia potrzebne jest połączenie dwukierunkowe (informacja zwrotna o powodzeniu). Rozwiązaniem tego problemu jest rozgłoszenie adresu podsieci R2-R3.
-\inputminted[label= Pingowanie adresu R1 z routera R3, firstline=582, lastline=587]{text}{Routers/R3.txt}
+
+Rozgłaszanie podsieci za pośrednictwem protokołu BGP odbywa się za pomocą polecenia \mintinline{text}{network <adres> mask <maska>}. Rozgłoszona zostaje podsieć reprezentowana przez interfejs loopback 1 routera R1, tj. podsieć o adresie 192.168.11.1/24. Analiza wpisów w tablicach routingu na routerach R2 i R3 pokazuje, że podsieć R1 jest widoczna w routerze R2 i nie jest widoczna w R3. Wynika to z faktu, że podsieć jest rozgłaszana tylko w eBGP ustanowionym między R1 i R2.
+\inputminted[label= Tablica routingu na R2, firstline=468, lastline=496]{text}{Routers/R2.txt}%
+\inputminted[label= Tablica routingu na R3, firstline=528, lastline=547]{text}{Routers/R3.txt}%
+
+By w tablicy routingu R3 widoczna była podsieć R1 należy ustawić atrybut next-hop rozgłaszany z R2 do R3 był ustawiony na router R2. Odbywa się to przy pomocy polecenia \mintinline{text}{neighbor <adres> next-hop-self}. Adres podsieci jest teraz obecny w tablicy routingu R2. W dalszym ciągu jednak polecenie \mintinline{text}{ping} z R3 na adres R1 kończy się niepowodzeniem. Wynika to z jednostronnej komunikacji między routerami, podczas gdy do pomyślnego zakończenia polecenia potrzebne jest połączenie dwukierunkowe (informacja zwrotna o powodzeniu). Rozwiązaniem tego problemu jest rozgłoszenie adresu podsieci R2-R3.
+\inputminted[label= Pingowanie adresu R1 z routera R3, firstline=582, lastline=587]{text}{Routers/R3.txt}%
+
 \subsection{Konfiguracja pozostałych sesji eBGP}
+
 W dalszej części skonfigurowane zostają pozostałe sesje eBGP między systemami autonomicznymi. Odbywa się to w sposób analogiczny dla ustanawiania sesji między R1 i R2. Ustanowione zostają połączenia R2-R4, R3-R4, R3-R5, R4-R5. Analizując wyniki polecenia \mintinline{text}{show ip bgp summary} na routerze R3 można stwierdzić, że sesje zostały ustanowione pomyślnie.
-\inputminted[label=Rezultat polecenia show ip bgp summary na R3, firstline=806, lastline=821]{text}{Routers/R3.txt}
-Rozgłoszone zostają teraz adresy loopback L1, L2 i L3 w sposób analogiczny adres loopback L1 routera R1. Analizując tablicę routingu na routerze R3 można stwierdzić, że wszystkie adresy pomyślnie się rozprzestrzeniły.
-\inputminted[label=Tablica routingu na R3 po rozgłoszeniu loopbacków, firstline=891, lastline=916]{text}{Routers/R3.txt}
-Przeanalizowana zostanie teraz komunikacja routerów R1 i R5. W tym celu na routerze R1 zostaną wykonane polecenia \mintinline{text}{ping} i \mintinline{text}{traceroute} z adresem źródłowym ustawionym na loopback 1 i adresem loopback 1 z R5 jako adresem docelowym. Pomyślne pingowanie potwierdza komunikację między routerami. Obierana przez dane trasa to R2-R4-R5. Długości tras R2-R4-R5 i R2-R3-R5 są takie same, dlatego wybrana została ścieżka z routerem o wyższym numerze. 
-\inputminted[label=Komunikacja między R1 i R5, firstline=316, lastline=330]{text}{Routers/R1.txt}
+\inputminted[label=Rezultat polecenia show ip bgp summary na R3, firstline=806, lastline=821]{text}{Routers/R3.txt}%
+
+\subsection{Rozgłaszanie adresów loopback}
+
+Rozgłoszone zostają teraz adresy loopback L1, L2 i L3 w sposób analogiczny do adresu loopback L1 routera R1. Analizując tablicę routingu na routerze R3 można stwierdzić, że wszystkie adresy pomyślnie się rozprzestrzeniły.
+\inputminted[label=Tablica routingu na R3 po rozgłoszeniu loopbacków, firstline=891, lastline=916]{text}{Routers/R3.txt}%
+
+\subsection{Zmiana trasy pomiędzy R1 a R5}
+
+Przeanalizowana zostanie teraz komunikacja routerów R1 i R5. W tym celu na routerze R1 zostaną wykonane polecenia \mintinline{text}{ping} i \mintinline{text}{traceroute} z adresem źródłowym ustawionym na loopback 1 i adresem loopback 1 z R5 jako adresem docelowym. Pomyślne pingowanie potwierdza komunikację między routerami. Obierana przez dane trasa to R2-R4-R5. Długości tras R2-R4-R5 i R2-R3-R5 są takie same, dlatego wybrana została ścieżka z routerem o wyższym numerze.
+\inputminted[label=Komunikacja między R1 i R5, firstline=316, lastline=330]{text}{Routers/R1.txt}%
+
 By zmusić router do obrania trasy R2-R3-R5 można nadpisać atrybut next-hop na R2 przez R3. Odbywa się to w sposób przedstawiony w sekcji C.3. Ponowne wywołanie traceroute pokazuje, że dane obierają zmienioną trasę.
-\inputminted[label=Komunikacja między R1 i R5 po zmianie next-hop, firstline=331, lastline=338]{text}{Routers/R1.txt}
+\inputminted[label=Komunikacja między R1 i R5 po zmianie next-hop, firstline=331, lastline=338]{text}{Routers/R1.txt}%
+
 \section{Zaawansowana konfiguracja BGP}
+
+\subsection{Konfiguracja local preference}
+
+Bez dodatkowej konfiguracji pakiety z R1 do R4 idą najkrótszą ścieżką, tj. R1-R2-R4.
+
+\inputminted[label=Komunikacja między R1 i R4 bez local preference, firstline=339, lastline=345]{text}{Routers/R1.txt}%
+
+AS 230 zostanie skonfigurowany tak, aby cały ruch wysyłany z R1 do R4 opuszczał ten system przez interfejs e0/3 routera R3.
+
+\inputminted[label=Ustawianie local preference na R3, firstline=931, lastline=935]{text}{Routers/R3.txt}%
+
+Aby zaobserwować zmiany należy wyczycić sesję BGP pomiędzy R3 a R4 poleceniem \mintinline{text}{clear ip bgp 10.0.34.2 soft} na routerze R3. Po zastosowaniu konfiguracji pakiety z R1 do R4 przechodzą przez połączenie R3-R4.
+
+\inputminted[label=Komunikacja między R1 i R4 z local preference, firstline=346, lastline=353]{text}{Routers/R1.txt}%
 
 \end{document}
