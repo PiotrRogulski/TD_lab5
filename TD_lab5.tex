@@ -156,4 +156,20 @@ Aby zaobserwować zmiany należy wyczycić sesję BGP pomiędzy R3 a R4 poleceni
 
 \inputminted[label=Komunikacja między R1 i R4 z local preference, firstline=346, lastline=353]{text}{Routers/R1.txt}%
 
+\subsection{Path prepending}
+
+Aby ruch przychodzący do podsieci loopback1 routera R5 wchodził do AS 500 przez AS 400, należy użyć mechanizmu path prepending. W tym celu tworzy się route-mapę, która dla ruchu wychodzącego wstawia na początek AS-path wielokrotnie numer systemu AS 500. Następnie utworzoną route-mapę należy dodać do połączenia R5-R3 w sesji BGP:
+
+\inputminted[label=Konfiguracja path prepending dla interfejsu R5-R3, firstline=372, lastline=378]{text}{Routers/R5_2.txt}%
+
+Po skonfigurowaniu pakiety z R1 do R5 idą ścieżką R1-R2-R4-R5.
+
+\inputminted[label=Komunikacja między R1 i R5 z path prepending, firstline=533, lastline=540]{text}{Routers/R1.txt}%
+
+\inputminted[label=baza danych BGP na R1, firstline=557, lastline=572]{text}{Routers/R1.txt}%
+
+Po wyłączeniu interfejsu R4-R5 pakiety z powrotem idą przez router R3:
+
+\inputminted[label=Komunikacja między R1 i R5 z path prepending, firstline=573, lastline=580]{text}{Routers/R1.txt}%
+
 \end{document}
