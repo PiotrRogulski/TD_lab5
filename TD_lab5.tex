@@ -166,10 +166,14 @@ Po skonfigurowaniu pakiety z R1 do R5 idą ścieżką R1-R2-R4-R5.
 
 \inputminted[label=Komunikacja między R1 i R5 z path prepending, firstline=533, lastline=540]{text}{Routers/R1.txt}%
 
-\inputminted[label=baza danych BGP na R1, firstline=557, lastline=572]{text}{Routers/R1.txt}%
+\inputminted[label=Baza danych BGP na R1, firstline=557, lastline=572]{text}{Routers/R1.txt}%
 
 Po wyłączeniu interfejsu R4-R5 pakiety z powrotem idą przez router R3:
 
 \inputminted[label=Komunikacja między R1 i R5 z path prepending, firstline=573, lastline=580]{text}{Routers/R1.txt}%
+
+\subsection{Multi Exit Discriminator}
+
+W celu kontroli ruchu wchodzącego do interfejsów loopback L2 i L3 routera R4 w systemie autonomicznym 400, należy zastosować atrybut MED (preferowana jest ścieżka z mniejszą wartością). Aby poprawnie skonfigurować Multi Exit Discriminator, trzeba najpierw przywrócić ustawienia zmienione w punkcie D.2. Konfiguracja MED polega na zdefiniowaniu list dostępu na routerze R4 mówiące o metrykach odpowiednich połączeń do interfejsów oraz przypisaniu ich do sąsiadów w sesji BGP.
 
 \end{document}
