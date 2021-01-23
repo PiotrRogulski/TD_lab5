@@ -176,4 +176,7 @@ Po wyłączeniu interfejsu R4-R5 pakiety z powrotem idą przez router R3:
 
 W celu kontroli ruchu wchodzącego do interfejsów loopback L2 i L3 routera R4 w systemie autonomicznym 400, należy zastosować atrybut MED (preferowana jest ścieżka z mniejszą wartością). Aby poprawnie skonfigurować Multi Exit Discriminator, trzeba najpierw przywrócić ustawienia zmienione w punkcie D.2. Konfiguracja MED polega na zdefiniowaniu list dostępu na routerze R4 mówiące o metrykach odpowiednich połączeń do interfejsów oraz przypisaniu ich do sąsiadów w sesji BGP.
 
+Listy dostępu definiuje się przy pomocy komendy \mintinline{text}{access-list <nr_listy> permit <adres_ip> <wildcard>}. Przypisanie listy następuje przy pomocy route-mapy i użytego w niej polecenia  \mintinline{text}{match ip address <nr_listy>}, w mapie ustawia się również wartość metryki przy pomocy  \mintinline{text}{set metric <wartość>}, przy czym im mniejsza wartość, tym większy priorytet.
+
+Próby ustawienia mniejszej metryki (większego priorytetu) na łączu e0/1 routera R4 dla adresu loopback L2 i na łączu e0/3 routera R4 dla adresu loopback L3 zakończyły się niepowodzeniem. Próby komunikacji z innych routerów wskazywały, że albo dany adres nie był w ogóle dostępny (ping kończył się niepowodzeniem), albo dane wybierały dowolną trasę (nie tą wymuszoną). Rozważone zostały różne konfiguracje, w tym związane ze zmianą priorytetu dla interfejsu loopback L1, żadne z nich nie przyniosły oczekiwanych skutków. Nie udało się zdiagnozować przyczyn problemu.
 \end{document}
